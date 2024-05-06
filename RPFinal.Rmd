@@ -1,0 +1,194 @@
+---
+title: "RPFinalCode"
+output: html_notebook
+---
+
+```{r}
+#install.packages(c("readxl", "janitor", "tidyverse", "msa", "ggtree", "ape", "seqinr", "here", "rentrez", "Biostrings"))
+```
+
+
+```{r}
+library(readxl)
+library(janitor)
+library(tidyverse)
+library(msa)
+library(ggtree)
+library(ape)
+library(seqinr)
+library(here)
+library(rentrez)
+library(Biostrings)
+library(treeio)
+```
+
+Testing Code for ACTB gene
+```{r}
+ACTB_search <- entrez_search(db = "gene", term ="Mammalia[ORGN] OR AVES[ORGN] AND ACTB[Gene]", retmax = 334)
+
+link_ACTB <- entrez_link(dbfrom = "gene", id = ACTB_search$ids, db = "nucleotide")
+
+trans_ACTB <- link_ACTB$links$gene_nuccore_refseqrna
+```
+
+This will take awhile to run
+```{r}
+ACTB_list <- vector(mode = "list")
+
+for (i in trans_ACTB){
+  ACTB_list[[i]] <- entrez_summary(db = "nuccore", id = i)
+  print(ACTB_list[i])
+}
+```
+
+```{r}
+ACTB <- map_df(ACTB_list, function(x){data.frame(Organism = c(x$organism), `Taxon_ID` = c(x$taxid), `GID` = c(x$uid), Length = as.integer(c(x$statistics[which(x$statistics$type == "Length"), "count"][[1]])))})
+
+ACTB_sort <- ACTB %>% filter(Length > 1000) %>% filter(Length < 2000)
+
+write.csv(ACTB_sort, here("ACTBtab.csv"), row.names = FALSE)
+
+ACTB_GID <- ACTB_sort %>% slice(1:50) %>% pull(GID)
+
+ACTB_names <- ACTB_sort %>% slice(1:50) %>% pull(Organism)
+
+ACTB_taxid <- ACTB_sort %>% slice(1:50) %>% pull(Taxon_ID)
+
+
+genbank_ACTB <- read.GenBank(ACTB_GID, species.names = FALSE)
+
+write.dna(genbank_ACTB, here("genbank_ACTB.fasta"), format = "fasta")
+
+ACTB_seqinr <- read.fasta(file = here("genbank_ACTB.fasta"), as.string = TRUE)
+
+write.fasta(sequences = getSequence(ACTB_seqinr, as.string = TRUE), names = paste(ACTB_GID, "|", paste(ACTB_names)), file.out = here("sequence_ACTB.fasta"))
+
+ACTB_cut <- subseq(readDNAStringSet(here("sequence_ACTB.fasta")), 1, 1385)
+
+ACTB_align <- msa(ACTB_cut)
+
+ACTB_dist <- dist.dna(as.DNAbin(ACTB_align))
+
+ACTB_tree <- nj(ACTB_dist)
+
+ggtree(ACTB_tree) + 
+  geom_tiplab(size = 4) + 
+  geom_rootedge(rootedge = 0.01) + 
+  geom_treescale(width = 0.2) + 
+  geom_nodepoint(size = 1.5, colour = "red", alpha = 0.5) +
+  geom_tippoint(size = 2, shape = 18, colour = "black") +
+  labs(title = "ACTB Tree")
+
+ACTB_tree$edge.length
+
+ggsave(here("treeACTB.jpeg"), width = 15, height = 10)
+```
+
+Covid for bat
+```{r}
+covid_bat_search <- entrez_search(db = "nucleotide", term = "SARS[ORGN] AND Bat[TITL] AND spike[ALL] AND complete[ALL]", retmax = 20)
+
+covid_bat_list <- vector(mode = "list")
+
+for (i in covid_bat_search$ids){
+  covid_bat_list[[i]] <- entrez_summary(db = "nuccore", id = i)
+  print(covid_bat_list[i])
+}
+
+Bat_cov <- map_df(covid_bat_list, function(x){data.frame(
+    Organism = c(x$organism),  `Taxon_ID` = c(x$taxid), `GID` = c(x$uid), `Title` = c(x$subname), Length = c(x$statistics[which(x$statistics$type == "Length"),"count"][[1]]))})
+```
+
+Covid for humans
+```{r}
+covid_2_search <- entrez_search(db = "nucleotide", term = "SARs-CoV-2[ORGN] AND complete[ALL]", retmax = 5)
+
+covid_2_list <- vector(mode = "list")
+
+for (i in covid_2_search$ids){
+  covid_2_list[[i]] <- entrez_summary(db = "nuccore", id = i)
+  print(covid_2_list[i])
+}
+
+Cov_2 <- map_df(covid_2_list, function(x){data.frame(
+    Organism = c(x$organism),  `Taxon_ID` = c(x$taxid), `GID` = c(x$uid), `Title` = c(x$subname), Length = c(x$statistics[which(x$statistics$type == "Length"), "count"][[1]]))})
+```
+
+Covid for pangolins
+```{r}
+covid_pangolin_search <- entrez_search(db = "nucleotide", term = "Pangolin coronavirus[ORGN] AND complete[ALL]")
+
+covid_pangolin_list <- vector(mode = "list")
+
+for (i in covid_pangolin_search$ids){
+  covid_pangolin_list[[i]] <- entrez_summary(db="nuccore", id=i)
+  print(covid_pangolin_list[i])
+}
+
+Pangolin_cov <- map_df(covid_pangolin_list, function(x){data.frame(
+    Organism = c(x$organism),  `Taxon_ID` = c(x$taxid), `GID` = c(x$uid), `Title` = c(x$subname), Length = c(x$statistics[which(x$statistics$type == "Length"), "count"][[1]]))})
+```
+
+Covid Tree
+```{r}
+Covid_table <- full_join(Bat_cov, Pangolin_cov) %>% full_join(Cov_2)
+
+Covid_table_sort <- Covid_table %>% filter(Length > 5000)
+
+write.csv(Covid_table_sort, here("covtable.csv"), row.names = FALSE)
+
+Covid_names <- Covid_table_sort %>% pull(Organism)
+
+Covid_sub <- Covid_table_sort %>% pull(Title)
+
+Covid_GID <- Covid_table_sort %>% pull(GID)
+
+class(covid_spike)
+
+covid_bank <- read.GenBank(Covid_GID, species.names = FALSE)
+
+write.dna(covid_bank, here("covid_bank.fasta"), format = "fasta")
+
+covid_seqinr <- read.fasta(file = here("covid_bank.fasta"), as.string = TRUE)
+
+write.fasta(sequences = getSequence(covid_seqinr, as.string = TRUE), names = paste(Covid_GID, "|", paste(Covid_sub)), file.out = here("sequence_covid.fasta"))
+
+covid_spike <- subseq(readDNAStringSet(here("sequence_covid.fasta")), 21000, 26000)
+
+covid_align <- msa(covid_spike)
+
+covid_dist <- dist.dna(as.DNAbin(covid_align))
+
+covid_tree <- nj(covid_dist)
+
+ggtree(covid_tree, size = 0.5) + 
+  geom_tiplab(size = 3.75) + 
+  geom_rootedge(rootedge = 0.01) + 
+  geom_treescale(width = 0.75) + 
+  geom_nodepoint(size = 1.5, colour = "red", alpha = 0.5) +
+  geom_tippoint(size = 2, shape = 18, colour = "black") +
+  labs(title = "Coronavirus Spike Tree")
+
+ggsave(here("treecovid.jpeg"), width = 20, height = 10)
+```
+
+https://4va.github.io/biodatasci/r-ggtree.html
+https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html
+https://yulab-smu.top/treedata-book/chapter4.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
