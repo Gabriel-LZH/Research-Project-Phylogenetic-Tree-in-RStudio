@@ -1,0 +1,41 @@
+"","Organism","Taxon_ID","GID","Title","Length"
+"1","Bat SARS-like coronavirus",1508227,"1369125429","bat-SL-CoVZXC21|Rhinolophus pusillus|China|Jul-2015",29732
+"2","Bat SARS-like coronavirus",1508227,"1369125417","bat-SL-CoVZC45|Rhinolophus pusillus|China|Feb-2017",29802
+"3","Bat SARS-like coronavirus",1508227,"2210671628","200609|Rhinolophus sinicus|China|anal swab|24-May-2020",3729
+"4","Bat SARS-like coronavirus",1508227,"2210671626","RaCH039|Rhinolophus affinis|China|anal swab|17-Sep-2020",3726
+"5","Bat SARS-like coronavirus",1508227,"2210671624","RaCH027|Rhinolophus affinis|China|anal swab|17-Sep-2020",3726
+"6","Bat SARS-like coronavirus",1508227,"2210671622","RaCH025|Rhinolophus affinis|China|anal swab|17-Sep-2020",3726
+"7","Bat SARS-like coronavirus",1508227,"2210671620","Rs87|Rhinolophus sinicus|China|anal swab|29-Apr-2020",3726
+"8","Bat SARS-like coronavirus",1508227,"2210671618","Rs68|Rhinolophus sinicus|China|anal swab|29-Apr-2020",3726
+"9","Bat SARS-like coronavirus",1508227,"2210671616","Rs67|Rhinolophus sinicus|China|anal swab|29-Apr-2020",3726
+"10","Bat SARS-like coronavirus",1508227,"2210671614","Rs56|Rhinolophus sinicus|China|anal swab|29-Apr-2020",3726
+"11","Bat coronavirus RaTG13",2709072,"1916859392","RaTG13|Rhinolophus affinis|former lab designation: Bat coronavirus Ra4991|China|fecal swab|24-Jul-2013",29855
+"12","Bat SARS coronavirus HKU3",442736,"1890528893","HKU3|icHKU3-SRBD-MA|USA|16-Dec-2008|R. Graham|contains SARS mouse-adapted receptor-binding domain",29781
+"13","Bat SARS coronavirus HKU3",442736,"1890528878","HKU3|icHKU3-SRBD|USA|16-Dec-2008|R. Graham|contains SARS receptor-binding domain",29781
+"14","Bat SARS-like coronavirus",1508227,"656462529","Longquan-140|Rhinolophus monoceros|China|2012",29676
+"15","Bat SARS-like coronavirus",1508227,"1270541521","Rs9401|Rhinolophus sinicus|China|16-Oct-2015",29769
+"16","Bat SARS-like coronavirus",1508227,"1270541507","Rs7327|Rhinolophus sinicus|China|24-Oct-2014",30307
+"17","Bat SARS-like coronavirus",1508227,"1270541493","Rs4874|Rhinolophus sinicus|China|21-Jul-2013",30311
+"18","Bat SARS-like coronavirus",1508227,"1270541480","Rs4255|Rhinolophus sinicus|China|17-Apr-2013",29743
+"19","Bat SARS-like coronavirus",1508227,"1270541467","Rs4247|Rhinolophus sinicus|China|17-Apr-2013",29743
+"20","Bat SARS-like coronavirus",1508227,"1270541454","Rs4237|Rhinolophus sinicus|China|17-Apr-2013",29741
+"21","Pangolin coronavirus",2708335,"2289324295","HKU4/GX-2020|Manis javanica|China: Guangxi|throat swab and anal swab|2020",30358
+"22","Pangolin coronavirus",2708335,"2443271073","GD/P79-9/2019|Manis javanica|animal metagenome|China|Mar-2019",29768
+"23","Pangolin coronavirus",2708335,"2044015426","GX_P2V|pangolin|Vero E6|eighth passage",29729
+"24","Pangolin coronavirus",2708335,"1817977257","MP789|Manis javanica|China|lung|2019-03-29",29521
+"25","Pangolin coronavirus",2708335,"1879599858","cDNA31-S|Manis javanica|China|lung|2019",3798
+"26","Pangolin coronavirus",2708335,"1879599856","cDNA20-S|Manis javanica|China|lung|2019",3798
+"27","Pangolin coronavirus",2708335,"1879599854","cDNA18-S|Manis javanica|China|lung|2019",3798
+"28","Pangolin coronavirus",2708335,"1879599852","cDNA16-S|Manis javanica|China|lung|2019",3798
+"29","Pangolin coronavirus",2708335,"1879599850","cDNA9-S|Manis javanica|China|lung|2019",3798
+"30","Pangolin coronavirus",2708335,"1879599848","cDNA8-S|Manis javanica|China|lung|2019",3798
+"31","Pangolin coronavirus",2708335,"1824829169","PCoV_GX-P2V|pangolin|China|2018|passaged in Vero E6",29795
+"32","Pangolin coronavirus",2708335,"1808708909","PCoV_GX-P5E|Manis javanica (Malayan pangolin)|China|2017",29802
+"33","Pangolin coronavirus",2708335,"1808708899","PCoV_GX-P5L|Manis javanica (Malayan pangolin)|China|2017",29806
+"34","Pangolin coronavirus",2708335,"1808708889","PCoV_GX-P1E|Manis javanica (Malayan pangolin)|China|2017",29801
+"35","Pangolin coronavirus",2708335,"1808708879","PCoV_GX-P4L|Manis javanica (Malayan pangolin)|China|2017",29805
+"36","Severe acute respiratory syndrome coronavirus 2",2697049,"2691439885","Viet Nam|nasopharyngeal swab|2024-01-16|SARS-CoV-2/human/VNM/NHTD-OUCRU4238/2024|Homo sapiens|SARS-CoV-2",29720
+"37","Severe acute respiratory syndrome coronavirus 2",2697049,"2691439872","Viet Nam|nasopharyngeal swab|2024-01-24|SARS-CoV-2/human/VNM/NHTD-OUCRU4237/2024|Homo sapiens|SARS-CoV-2",29746
+"38","Severe acute respiratory syndrome coronavirus 2",2697049,"2691439859","Viet Nam|nasopharyngeal swab|2024-01-22|SARS-CoV-2/human/VNM/NHTD-OUCRU4236/2024|Homo sapiens|SARS-CoV-2",29749
+"39","Severe acute respiratory syndrome coronavirus 2",2697049,"2691439847","Viet Nam|nasopharyngeal swab|2024-01-19|SARS-CoV-2/human/VNM/NHTD-OUCRU4235/2024|Homo sapiens|SARS-CoV-2",29746
+"40","Severe acute respiratory syndrome coronavirus 2",2697049,"2691439834","Viet Nam|nasopharyngeal swab|2024-01-19|SARS-CoV-2/human/VNM/NHTD-OUCRU4234/2024|Homo sapiens|SARS-CoV-2",29746
